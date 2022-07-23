@@ -1,23 +1,44 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {ArrowLeft} from 'phosphor-react-native';
-import React from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Image, TouchableOpacity, View} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {About} from '../../components/About';
 import {BottomSheet} from '../../components/BottomSheet';
+import {Heading} from '../../components/Heading';
 import {PokemonTypes} from '../../components/PokemonTypes';
+import {api} from '../../libs/api';
+import {PokemonSpecies} from '../../types/PokemonSpecies';
+import {EvolutionChains} from '../../components/EvolutionChains';
 import {
   getBackgroundColor,
-  getPokemonHeight,
-  getPokemonWeight,
   hashNumber,
-  upperCaseFirstLetter,
+  capitalize,
+  getImagePokemon,
 } from '../../utils/pokemonUtils';
+
 import {styles} from './styles';
 
 export function Pokemon() {
   const route = useRoute();
   const {pokemons} = route.params;
   const navigation = useNavigation();
+
+  const [training, setTraining] = useState<PokemonSpecies>();
+
+  useEffect(() => {
+    getPokemonTraining();
+  }, []);
+
+  async function getPokemonTraining() {
+    if (pokemons) {
+      const response = await api.get(`/pokemon-species/${pokemons.name}`);
+
+      const trainingResponse = response.data;
+
+      setTraining(trainingResponse);
+    }
+  }
 
   return (
     <>
@@ -28,6 +49,11 @@ export function Pokemon() {
               backgroundColor: getBackgroundColor(pokemons.types),
               ...styles.container,
             }}>
+            <View style={{position: 'absolute', width: '300%'}}>
+              <Heading variant="title" color="#fff" style={{opacity: 0.2}}>
+                {training?.names[0].name}
+              </Heading>
+            </View>
             <View style={styles.menuHeader}>
               <TouchableOpacity onPress={() => navigation.goBack()}>
                 <ArrowLeft size={24} weight="bold" color="#fff" />
@@ -35,46 +61,29 @@ export function Pokemon() {
             </View>
 
             <View style={styles.head}>
-              <Image
-                style={styles.image}
-                source={{uri: pokemons.sprites.front_default}}
-              />
+              <Image style={styles.image} source={getImagePokemon(pokemons)} />
 
-              <View style={styles.info}>
-                <Text style={styles.number}>#{hashNumber(pokemons.id)}</Text>
-                <Text style={styles.name}>
-                  {upperCaseFirstLetter(pokemons.name)}
-                </Text>
+              <View>
+                <Heading variant="filter" color="#17171B">
+                  #{hashNumber(pokemons.id)}
+                </Heading>
+                <Heading variant="appTitle" color="#FFF">
+                  {capitalize(pokemons.name)}
+                </Heading>
+
                 <PokemonTypes types={pokemons.types} />
               </View>
             </View>
           </View>
+
           <BottomSheet>
-            <Text
-              style={{
-                color: getBackgroundColor(pokemons.types),
-              }}>
-              Pokedex Data
-            </Text>
-            <View style={styles.pokedexData}>
-              <View>
-                <Text style={styles.data}>Height</Text>
-                <Text style={styles.data}>Weight</Text>
-                <Text style={styles.data}>Abilities</Text>
-                <Text style={styles.data}>Weaknesses</Text>
-              </View>
-              <View style={styles.box}>
-                <Text style={styles.data}>
-                  {getPokemonHeight(pokemons.height)}
-                </Text>
-                <Text style={styles.data}>
-                  {getPokemonWeight(pokemons.weight)}
-                </Text>
-                {pokemons.abilities.map(ab => (
-                  <Text style={styles.data}>{ab.ability.name}</Text>
-                ))}
-              </View>
-            </View>
+            {training && <EvolutionChains species={training} />}
+
+            {/*<About pokemons={pokemons} training={training} />
+
+            <Stats pokemon={pokemons} />
+
+              <Location pokemon={pokemons} />*/}
           </BottomSheet>
         </GestureHandlerRootView>
       )}

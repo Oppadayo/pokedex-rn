@@ -11,27 +11,29 @@ import {styles} from './styles';
 import {
   getBackgroundColor,
   hashNumber,
-  upperCaseFirstLetter,
+  capitalize,
+  getImagePokemon,
 } from '../../utils/pokemonUtils';
 
 import {useNavigation} from '@react-navigation/native';
 import {PokemonTypes} from '../PokemonTypes';
+import {Pokemon} from '../../types/Pokemon';
 
 interface Props extends TouchableOpacityProps {
-  url: string[];
+  data: string[{url: string}];
 }
 
-export function PokemonCard({url, ...props}: Props) {
-  const [pokemons, setPokemons] = useState();
+export function PokemonCard({data}: Props) {
+  const [pokemons, setPokemons] = useState<Pokemon>();
 
   const navigation = useNavigation();
 
   useEffect(() => {
     fetchPokemons();
-  }, [url]);
+  }, [data]);
 
   async function fetchPokemons() {
-    await fetch(url.url)
+    await fetch(data.url)
       .then(res => res.json())
       .then(pokemon => {
         setPokemons(pokemon);
@@ -53,14 +55,9 @@ export function PokemonCard({url, ...props}: Props) {
             backgroundColor: getBackgroundColor(pokemons.types),
             ...styles.container,
           }}>
-          <Image
-            style={styles.image}
-            source={{uri: pokemons.sprites.front_default}}
-          />
+          <Image style={styles.image} source={getImagePokemon(pokemons)} />
           <View style={{marginLeft: 24}}>
-            <Text style={styles.name}>
-              {upperCaseFirstLetter(pokemons.name)}
-            </Text>
+            <Text style={styles.name}>{capitalize(pokemons.name)}</Text>
 
             <PokemonTypes types={pokemons.types} />
           </View>

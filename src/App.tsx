@@ -9,7 +9,6 @@
  */
 
 import React from 'react';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 import {StackNavigation} from './routes/StackNavigation';
 

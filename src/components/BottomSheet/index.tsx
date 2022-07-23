@@ -11,7 +11,7 @@ const {height: SCREEN_HIGHT} = Dimensions.get('window');
 const MAX_TRANSLATE_Y = -SCREEN_HIGHT + 66;
 
 interface Props {
-  children: JSX.Element;
+  children: JSX.Element | JSX.Element[];
 }
 
 export function BottomSheet({children}: Props) {
@@ -33,10 +33,10 @@ export function BottomSheet({children}: Props) {
       translateY.value = Math.max(translateY.value, MAX_TRANSLATE_Y);
     })
     .onEnd(() => {
-      if (translateY.value > -SCREEN_HIGHT / 3) {
-        scrollTo(0);
-      } else if (translateY.value < -SCREEN_HIGHT / 1.5) {
-        scrollTo(MAX_TRANSLATE_Y);
+      if (translateY.value > -SCREEN_HIGHT / 4) {
+        scrollTo(-15);
+      } else if (translateY.value < -SCREEN_HIGHT / 1.2) {
+        scrollTo(MAX_TRANSLATE_Y + 300);
       }
     });
 
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#fff',
     position: 'absolute',
-    top: SCREEN_HIGHT,
+    top: SCREEN_HIGHT / 1.5,
     borderRadius: 24,
     padding: 18,
   },

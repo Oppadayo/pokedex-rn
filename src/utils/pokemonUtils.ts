@@ -1,3 +1,5 @@
+import {Pokemon} from '../types/Pokemon';
+
 export const getBackgroundColor = types => {
   switch (types[0].type.name) {
     case 'fire':
@@ -51,12 +53,18 @@ export const getBackgroundColor = types => {
     case 'fairy':
       return '#EBA8C3';
 
-    default:
+    case 'normal':
       return '#B5B9C4';
+
+    case 'black':
+      return '#000';
+
+    default:
+      return '#fff';
   }
 };
 
-export const upperCaseFirstLetter = (text: string) => {
+export const capitalize = (text: string) => {
   return text[0].toUpperCase() + text.slice(1);
 };
 
@@ -78,4 +86,84 @@ export const getPokemonWeight = (weight: number) => {
   let kg = weight / 10;
 
   return `${kg.toFixed(1)}kg`;
+};
+
+export const getPokemonWeaknesses = (type: string) => {
+  switch (type) {
+    case 'fire':
+      return ['ground', 'rock', 'water'];
+
+    case 'water':
+      return ['electric', 'grass'];
+
+    case 'poison':
+      return ['ground', 'psychic'];
+
+    case 'grass':
+      return ['bug', 'fire', 'flying', 'ice', 'poison'];
+
+    case 'electric':
+      return ['ground'];
+
+    case 'rock':
+      return ['fighting', 'grass', 'ground', 'steel', 'water'];
+
+    case 'dark':
+      return ['bug', 'fairy', 'fighting'];
+
+    case 'flying':
+      return ['electric', 'ice', 'rock'];
+
+    case 'dragon':
+      return ['dragon', 'fairy', 'ice'];
+
+    case 'bug':
+      return ['fire', 'flying', 'rock'];
+
+    case 'ground':
+      return ['grass', 'ice', 'water'];
+
+    case 'psychic':
+      return ['bug', 'dark', 'ghost'];
+
+    case 'fighting':
+      return ['fairy', 'flying', 'psychic'];
+
+    case 'ghost':
+      return ['dark', 'ghost'];
+
+    case 'ice':
+      return ['fighting', 'fire', 'rock', 'steel'];
+
+    case 'steel':
+      return ['fighting', 'fire', 'ground'];
+
+    case 'fairy':
+      return ['poison', 'steel'];
+
+    case 'normal':
+      return ['fighting'];
+
+    default:
+      return [];
+  }
+};
+
+export const getTypesDefense = types => {
+  let typesDefenses = [];
+  const weak = getPokemonWeaknesses(types[0].type.name);
+
+  weak?.map(wk => {
+    typesDefenses.push({type: wk, value: 2});
+  });
+
+  return typesDefenses;
+};
+
+export const getImagePokemon = (pokemon: Pokemon) => {
+  if (pokemon.sprites === undefined) {
+    return {uri: ''};
+  } else {
+    return {uri: pokemon.sprites.other['official-artwork'].front_default};
+  }
 };

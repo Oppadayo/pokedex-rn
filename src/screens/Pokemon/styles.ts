@@ -13,29 +13,12 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: 180,
-    height: 180,
+    width: 140,
+    height: 140,
   },
-  info: {},
-  number: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#fff',
-  },
-  name: {
-    fontSize: 26,
-    fontWeight: 'bold',
-    color: '#fff',
-    marginBottom: 12,
-  },
-  pokedexData: {
-    flexDirection: 'row',
-  },
+
   data: {
     color: '#000',
     marginVertical: 8,
-  },
-  box: {
-    padding: 28,
   },
 });

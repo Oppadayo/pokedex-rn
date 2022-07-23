@@ -14,10 +14,14 @@ import {PokemonCard} from '../../components/PokemonCard';
 import {api} from '../../libs/api';
 
 import {styles} from './styles';
-import {useNavigation} from '@react-navigation/native';
+
+interface Props {
+  name: string;
+  url: string;
+}
 
 export function Pokedex() {
-  const [pokemons, setPokemons] = useState<any[]>();
+  const [pokemons, setPokemons] = useState<Props[]>();
   const [limit, setLimit] = useState(20);
   const [count, setCount] = useState();
   const [offset, setOffset] = useState(0);
@@ -42,10 +46,6 @@ export function Pokedex() {
 
     setPokemons(pokemonsResults);
     setIsLoadingPokemon(false);
-  }
-
-  function renderPokemonCard(item) {
-    return <PokemonCard url={item} />;
   }
 
   async function handleEndReached() {
@@ -76,6 +76,10 @@ export function Pokedex() {
         ),
       );
     }
+  }
+
+  function renderPokemonCard(item: string[]) {
+    return <PokemonCard data={item} />;
   }
 
   return (
