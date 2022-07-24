@@ -1,5 +1,48 @@
 import {Pokemon} from '../types/Pokemon';
 
+export enum Type {
+  NORMAL = 'normal',
+  FIGHTING = 'fighting',
+  FLYING = 'flying',
+  POISON = 'poison',
+  GROUND = 'ground',
+  ROCK = 'rock',
+  BUG = 'bug',
+  GHOST = 'ghost',
+  STEEL = 'steel',
+  FIRE = 'fire',
+  WATER = 'water',
+  GRASS = 'grass',
+  ELECTRIC = 'electric',
+  PSYCHIC = 'psychic',
+  ICE = 'ice',
+  DRAGON = 'dragon',
+  DARK = 'dark',
+  FAIRY = 'fairy',
+  NONE = 'none',
+}
+
+const typesInPokemondbOrder = [
+  Type.NORMAL,
+  Type.FIRE,
+  Type.WATER,
+  Type.ELECTRIC,
+  Type.GRASS,
+  Type.ICE,
+  Type.FIGHTING,
+  Type.POISON,
+  Type.GROUND,
+  Type.FLYING,
+  Type.PSYCHIC,
+  Type.BUG,
+  Type.ROCK,
+  Type.GHOST,
+  Type.DRAGON,
+  Type.DARK,
+  Type.STEEL,
+  Type.FAIRY,
+];
+
 export const getBackgroundColor = types => {
   switch (types[0].type.name) {
     case 'fire':
@@ -147,17 +190,6 @@ export const getPokemonWeaknesses = (type: string) => {
     default:
       return [];
   }
-};
-
-export const getTypesDefense = types => {
-  let typesDefenses = [];
-  const weak = getPokemonWeaknesses(types[0].type.name);
-
-  weak?.map(wk => {
-    typesDefenses.push({type: wk, value: 2});
-  });
-
-  return typesDefenses;
 };
 
 export const getImagePokemon = (pokemon: Pokemon) => {

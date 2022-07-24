@@ -1,25 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Image, View} from 'react-native';
+import {View} from 'react-native';
 
-import {api} from '../../libs/api';
-
-import {
-  capitalize,
-  getBackgroundColor,
-  getTypesDefense,
-} from '../../utils/pokemonUtils';
+import {getBackgroundColor} from '../../utils/pokemonUtils';
 
 import {Heading} from '../Heading';
 
-import {PokemonSpecies} from '../../types/PokemonSpecies';
-import {EvolutionChainsProps} from '../../types/EvolutionChains';
 import {Pokemon} from '../../types/Pokemon';
-import {styles} from './styles';
-import {ArrowRight} from 'phosphor-react-native';
-import {StatsProps} from '../../types/Stats';
-import StatusBar, {ProgressBar} from '../ProgressBar';
-
-//import {} from './styles';
+import {ProgressBar} from '../ProgressBar';
 
 interface Props {
   pokemon: Pokemon;
@@ -39,13 +26,6 @@ export function Stats({pokemon}: Props) {
     setTotalStats(statsValue);
   }
 
-  /*const weak = coverageTypes.filter((ct) => {
-    const matchups = types.map((t) => matchupFor(generation, ct.types, t));
-    return matchups.some((effectiveness) => {
-      return effectiveness > 1;
-    });
-  });*/
-
   function getMinMaxStats(
     name: string,
     base: number,
@@ -59,8 +39,6 @@ export function Stats({pokemon}: Props) {
       return Math.floor((((2 * base + iv + ev / 4) * 100) / 100 + 5) * nature);
     }
   }
-
-  console.log(getTypesDefense(pokemon.types));
 
   return (
     <>
@@ -189,20 +167,6 @@ export function Stats({pokemon}: Props) {
         Os intervalos mostrados à direita são para um Pokémon de nível 100. Os
         valores máximos são baseados em natureza benéfica, 252 EVs, 31 IVs; os
         valores mínimos são baseados em natureza dificultadora, 0 EVs, 0 IVs.
-      </Heading>
-
-      <Heading
-        variant="filter"
-        color={getBackgroundColor(pokemon.types)}
-        style={{marginTop: 16}}>
-        Tipos de Defesa
-      </Heading>
-
-      <Heading
-        variant="type"
-        color="#17171B"
-        style={{textAlign: 'justify', marginTop: 6}}>
-        A eficácia de cada tipo no {capitalize(pokemon.name)}.
       </Heading>
 
       <View />

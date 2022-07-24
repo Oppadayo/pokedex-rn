@@ -10,6 +10,7 @@ import {PokemonTypes} from '../../components/PokemonTypes';
 import {api} from '../../libs/api';
 import {PokemonSpecies} from '../../types/PokemonSpecies';
 import {EvolutionChains} from '../../components/EvolutionChains';
+import {Stats} from '../../components/Stats';
 import {
   getBackgroundColor,
   hashNumber,
@@ -77,11 +78,12 @@ export function Pokemon() {
           </View>
 
           <BottomSheet>
-            {training && <EvolutionChains species={training} />}
-
-            {/*<About pokemons={pokemons} training={training} />
-
             <Stats pokemon={pokemons} />
+            {/*training && <EvolutionChains species={training} />}
+
+            <About pokemons={pokemons} training={training} />
+
+
 
               <Location pokemon={pokemons} />*/}
           </BottomSheet>

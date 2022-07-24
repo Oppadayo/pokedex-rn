@@ -251,7 +251,7 @@ export interface Pokemon {
   ];
   types: [
     {
-      slot: 1;
+      slot: number;
       type: {
         name: string;
         url: string;

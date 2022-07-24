@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
   },
   menuHeader: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     paddingVertical: 24,
   },
   title: {
@@ -27,11 +27,13 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginVertical: 12,
+    paddingHorizontal: 8,
+    backgroundColor: '#F5F5F5',
   },
   search: {
     flex: 1,
     backgroundColor: '#F5F5F5',
-    borderRadius: 50,
+    borderRadius: 10,
     paddingLeft: 12,
     color: '#000',
   },

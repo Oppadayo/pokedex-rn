@@ -1,30 +1,37 @@
 import React from 'react';
 import {View} from 'react-native';
+
+import {GrassIcon} from '../../assets/icons/badge/grass';
+import {PoisonIcon} from '../../assets/icons/badge/poison';
+import {FireIcon} from '../../assets/icons/badge/fire';
+import {ElectricIcon} from '../../assets/icons/badge/electric';
+import {FairyIcon} from '../../assets/icons/badge/fairy';
+import {BugIcon} from '../../assets/icons/badge/bug';
+import {DarkIcon} from '../../assets/icons/badge/dark';
+import {DragonIcon} from '../../assets/icons/badge/dragon';
+import {FightingIcon} from '../../assets/icons/badge/fighting';
+import {FlyingIcon} from '../../assets/icons/badge/flying';
+import {GhostIcon} from '../../assets/icons/badge/ghost';
+import {GroundIcon} from '../../assets/icons/badge/ground';
+import {IceIcon} from '../../assets/icons/badge/ice';
+import {NormalIcon} from '../../assets/icons/badge/normal';
+import {PsychicIcon} from '../../assets/icons/badge/psychic';
+import {RockIcon} from '../../assets/icons/badge/rock';
+import {SteelIcon} from '../../assets/icons/badge/steel';
+import {WaterIcon} from '../../assets/icons/badge/water';
+
 import {styles} from './styles';
 
-// import { Container } from './styles';
-
-import {GrassIcon} from '../../assets/icons/grass';
-import {PoisonIcon} from '../../assets/icons/poison';
-import {FireIcon} from '../../assets/icons/fire';
-import {ElectricIcon} from '../../assets/icons/electric';
-import {FairyIcon} from '../../assets/icons/fairy';
-import {BugIcon} from '../../assets/icons/bug';
-import {DarkIcon} from '../../assets/icons/dark';
-import {DragonIcon} from '../../assets/icons/dragon';
-import {FightingIcon} from '../../assets/icons/fighting';
-import {FlyingIcon} from '../../assets/icons/flying';
-import {GhostIcon} from '../../assets/icons/ghost';
-import {GroundIcon} from '../../assets/icons/ground';
-import {IceIcon} from '../../assets/icons/ice';
-import {NormalIcon} from '../../assets/icons/normal';
-import {PsychicIcon} from '../../assets/icons/psychic';
-import {RockIcon} from '../../assets/icons/rock';
-import {SteelIcon} from '../../assets/icons/steel';
-import {WaterIcon} from '../../assets/icons/water';
-
 interface Props {
-  types: {};
+  types: [
+    {
+      slot: number;
+      type: {
+        name: string;
+        url: string;
+      };
+    },
+  ];
 }
 
 export function getTypesIcon(type: string) {
@@ -104,8 +111,9 @@ export function getTypesIcon(type: string) {
 export function PokemonTypes({types}: Props) {
   return (
     <View style={styles.typeContainer}>
-      <View style={{marginRight: 8}}>{getTypesIcon(types[0].type.name)}</View>
-      <View>{types[1] && getTypesIcon(types[1].type.name)}</View>
+      {types.map(tp => (
+        <View style={{marginRight: 8}}>{getTypesIcon(tp.type.name)}</View>
+      ))}
     </View>
   );
 }

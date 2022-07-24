@@ -2,14 +2,25 @@ import React, {useEffect, useState} from 'react';
 import {
   ActivityIndicator,
   FlatList,
+  Image,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
 
-import {ArrowLeft, ListBullets, Sliders} from 'phosphor-react-native';
+import {
+  ArrowLeft,
+  DotsNine,
+  ListBullets,
+  MagnifyingGlass,
+  Sliders,
+  SortDescending,
+} from 'phosphor-react-native';
 import {PokemonCard} from '../../components/PokemonCard';
+import {Heading} from '../../components/Heading';
+
+import {pokeball} from '../../assets/images/pokeball.svg';
 
 import {api} from '../../libs/api';
 
@@ -86,24 +97,30 @@ export function Pokedex() {
     <View style={styles.container}>
       <View style={styles.menuHeader}>
         <TouchableOpacity>
-          <ArrowLeft size={24} weight="bold" color="#000" />
+          <DotsNine size={28} weight="bold" color="#17171B" />
         </TouchableOpacity>
-        <TouchableOpacity>
-          <ListBullets size={24} weight="bold" color="#000" />
+        <TouchableOpacity style={{marginLeft: 8}}>
+          <SortDescending size={28} weight="bold" color="#000" />
+        </TouchableOpacity>
+        <TouchableOpacity style={{marginLeft: 8}}>
+          <Sliders size={28} weight="bold" color="#000" />
         </TouchableOpacity>
       </View>
-      <Text style={styles.title}>Pokedex</Text>
+      <Heading variant="appTitle" color="#17171b">
+        Pokédex
+      </Heading>
+      <Heading variant="description" color="#747476">
+        Pesquise o Pokémon pelo nome ou o número nacional da Pokédex.
+      </Heading>
       <View style={styles.searchContainer}>
+        <MagnifyingGlass size={28} />
         <TextInput
           style={styles.search}
-          placeholder="Nome ou número do pokemon"
-          placeholderTextColor="#303943"
+          placeholder="Qual pokémon você procura?"
+          placeholderTextColor="#747476"
           onChangeText={text => setSearchPokemon(text)}
           value={searchPokemon}
         />
-        <TouchableOpacity style={styles.filter}>
-          <Sliders size={24} weight="bold" color="#000" />
-        </TouchableOpacity>
       </View>
 
       {isLoadingPokemon ? (

@@ -8,7 +8,6 @@ import {PokedexInfo} from './PokedexInfo';
 import {PokemonSpecies} from '../../types/PokemonSpecies';
 import {Pokemon} from '../../types/Pokemon';
 import {Breeding} from './Breeding';
-import {Location} from './Location';
 
 //Interface
 interface Props {
@@ -22,7 +21,6 @@ export function About({pokemons, training}: Props) {
       <PokedexInfo pokemon={pokemons} />
       <Training pokemon={pokemons} training={training} />
       <Breeding pokemon={pokemons} />
-      <Location pokemon={pokemons} />
     </>
   );
 }
