@@ -100,10 +100,10 @@ export function Pokedex() {
           <DotsNine size={28} weight="bold" color="#17171B" />
         </TouchableOpacity>
         <TouchableOpacity style={{marginLeft: 8}}>
-          <SortDescending size={28} weight="bold" color="#000" />
+          <SortDescending size={28} weight="bold" color="#17171B" />
         </TouchableOpacity>
         <TouchableOpacity style={{marginLeft: 8}}>
-          <Sliders size={28} weight="bold" color="#000" />
+          <Sliders size={28} weight="bold" color="#17171B" />
         </TouchableOpacity>
       </View>
       <Heading variant="appTitle" color="#17171b">
@@ -113,7 +113,7 @@ export function Pokedex() {
         Pesquise o Pokémon pelo nome ou o número nacional da Pokédex.
       </Heading>
       <View style={styles.searchContainer}>
-        <MagnifyingGlass size={28} />
+        <MagnifyingGlass size={22} weight="bold" color="#17171B" />
         <TextInput
           style={styles.search}
           placeholder="Qual pokémon você procura?"

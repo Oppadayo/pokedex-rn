@@ -111,8 +111,10 @@ export function getTypesIcon(type: string) {
 export function PokemonTypes({types}: Props) {
   return (
     <View style={styles.typeContainer}>
-      {types.map(tp => (
-        <View style={{marginRight: 8}}>{getTypesIcon(tp.type.name)}</View>
+      {types.map((tp, key) => (
+        <View key={key} style={{marginRight: 8}}>
+          {getTypesIcon(tp.type.name)}
+        </View>
       ))}
     </View>
   );
