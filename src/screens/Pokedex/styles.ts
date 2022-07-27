@@ -29,6 +29,7 @@ export const styles = StyleSheet.create({
     marginVertical: 12,
     paddingHorizontal: 8,
     backgroundColor: '#F5F5F5',
+    borderRadius: 10,
   },
   search: {
     flex: 1,
@@ -39,7 +40,7 @@ export const styles = StyleSheet.create({
   },
   filter: {
     backgroundColor: '#F5F5F5',
-    borderRadius: 50,
+    borderRadius: 10,
     padding: 14,
     marginLeft: 12,
   },
